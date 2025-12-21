@@ -20,12 +20,13 @@ class GraphDiffusionEncoder(nn.Module):
             self.manifold = Euclidean()
         else:
             raise RuntimeError('invalid argument: manifold')
-        self.c = Parameter(torch.ones(len(args.spatial_dilated_factors) * 3 + 1, 1).to(args.device) * args.curvature,
+        self.diffusion_steps = args.diffusion_steps
+        self.c = Parameter(torch.ones(len(self.diffusion_steps) * 3 + 1, 1).to(args.device) * args.curvature,
                            requires_grad=args.trainable_curvature)
         self.c_in=self.c[0]
         self.c_out = self.c[-1]
         self.spatial_layers = []
-        for i in range(len(args.spatial_dilated_factors)):
+        for i in range(len(self.diffusion_steps)):
                 layer1 = HGCNConv(self.manifold, args.nhid, args.nhid, args.device, self.c[i * 3],
                                   self.c[i * 3 + 1], dropout=args.dropout, use_bias=args.bias).to(device=args.device)
                 layer2 = HGCNConv(self.manifold, args.nhid, args.nout, args.device, self.c[i * 3 + 1],
@@ -34,7 +35,6 @@ class GraphDiffusionEncoder(nn.Module):
 
         self.nhid = args.nhid
         self.nout = args.nout
-        self.diffusion_steps = args.diffusion_steps
         self.Q = Parameter(torch.ones((args.nout, args.nhid)).to(args.device), requires_grad=True)
         self.r = Parameter(torch.ones((args.nhid, 1)).to(args.device), requires_grad=True)
         self.reset_parameter()
@@ -66,7 +66,7 @@ class GraphDiffusionEncoder(nn.Module):
         att = torch.reshape(att, (len(self.diffusion_steps), -1))
         att = F.softmax(att, dim=0).unsqueeze(2)
         diffusion_reshape = torch.reshape(diffusion, [len(self.diffusion_steps), -1, self.nout])
-        diffusion_agg = torch.mean(att * dilated_reshape, dim=0)
+        diffusion_agg = torch.mean(att * diffusion_reshape, dim=0)
         return diffusion_agg
 
     def forward(self, diffusion_edge_index, x=None):
