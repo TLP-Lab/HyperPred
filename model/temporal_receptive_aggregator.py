@@ -25,12 +25,12 @@ class TemporalReceptiveAaggregator(nn.Module):
         self.receptive_depth = args.receptive_depth
         self.casual_conv_kernel_size = args.casual_conv_kernel_size
         self.scales=args.scales
-        self.dilated_stack = nn.ModuleList([EfficientMLHA(manifold=self.manifold,k_hidden=self.c, in_channels=self.in_channels, out_channels=self.hidden_channels,casual_kernel_size=self.casual_conv_kernel_size,dilation=self.casual_conv_kernel_size**layer,heads_ratio=1.0, dim=4, scales=self.scales)
+        self.dilated_aggregation = nn.ModuleList([EfficientMLHA(manifold=self.manifold,k_hidden=self.c, in_channels=self.in_channels, out_channels=self.hidden_channels,casual_kernel_size=self.casual_conv_kernel_size,dilation=self.casual_conv_kernel_size**layer,heads_ratio=1.0, dim=4, scales=self.scales)
              for layer in range(self.receptive_depth)])
 
     def forward(self, x):
         skips = []
-        for layer in self.dilated_stack:
+        for layer in self.dilated_aggregation:
             skip, x = layer(x)
             skips.append(skip.unsqueeze(0))
         out = torch.cat(skips, dim=0).mean(dim=0)
