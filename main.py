@@ -36,7 +36,7 @@ class Trainer(object):
     def train(self):
         diffusion_edge_index_list = prepare_diffusion_edge_index(
             self.data,
-            args.spatial_dilated_factors,
+            args.diffusion_steps,
             args.device
         )
         t_total = time.time()
