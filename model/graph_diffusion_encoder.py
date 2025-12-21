@@ -34,7 +34,7 @@ class GraphDiffusionEncoder(nn.Module):
 
         self.nhid = args.nhid
         self.nout = args.nout
-        self.spatial_dilated_factors = args.spatial_dilated_factors
+        self.diffusion_steps = args.diffusion_steps
         self.Q = Parameter(torch.ones((args.nout, args.nhid)).to(args.device), requires_grad=True)
         self.r = Parameter(torch.ones((args.nhid, 1)).to(args.device), requires_grad=True)
         self.reset_parameter()
@@ -61,29 +61,28 @@ class GraphDiffusionEncoder(nn.Module):
             x = torch.cat([o[:, 0:1], x], dim=1)
         return self.to_hyper(x, c)
 
-    def aggregate_dilated(self, dilated):
-        print("dialted.shape:",dilated.shape)
-        att = torch.matmul(torch.tanh(torch.matmul(dilated, self.Q)), self.r)
-        att = torch.reshape(att, (len(self.spatial_dilated_factors), -1))
+    def aggregate_diffusion(self, diffusion):
+        att = torch.matmul(torch.tanh(torch.matmul(diffusion, self.Q)), self.r)
+        att = torch.reshape(att, (len(self.diffusion_steps), -1))
         att = F.softmax(att, dim=0).unsqueeze(2)
-        dilated_reshape = torch.reshape(dilated, [len(self.spatial_dilated_factors), -1, self.nout])
-        dilated_agg = torch.mean(att * dilated_reshape, dim=0)
-        return dilated_agg
+        diffusion_reshape = torch.reshape(diffusion, [len(self.diffusion_steps), -1, self.nout])
+        diffusion_agg = torch.mean(att * dilated_reshape, dim=0)
+        return diffusion_agg
 
-    def forward(self, dilated_edge_index, x=None):
+    def forward(self, diffusion_edge_index, x=None):
         x_list = []
         if x is None:
             x = self.linear(self.feat)
         else:
             x = self.linear(x)
-        for i in range(len(self.spatial_dilated_factors)):
+        for i in range(len(self.diffusion_steps)):
             x_f = self.init_hyper(x, self.c[i * 3])
-            x_f = self.spatial_layers[i][0](x_f, dilated_edge_index[i])
+            x_f = self.spatial_layers[i][0](x_f, diffusion_edge_index[i])
             x_f = self.manifold.proj(x_f, self.c[i * 3 + 1])
-            x_f = self.spatial_layers[i][1](x_f, dilated_edge_index[i])
+            x_f = self.spatial_layers[i][1](x_f, diffusion_edge_index[i])
             x_list.append(x_f)
         x = torch.cat([self.to_tangent(x_list[i], self.c[i * 3 + 2])
-                       for i in range(len(self.spatial_dilated_factors))], dim=0)
-        x = self.aggregate_dilated(x)
+                       for i in range(len(self.diffusion_steps))], dim=0)
+        x = self.aggregate_diffusion(x)
         x = self.to_hyper(x, self.c_out)
         return x
