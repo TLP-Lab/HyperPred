@@ -13,7 +13,7 @@ from model import HyperPred
 from loss import ReconLoss
 def tensor_to_list(obj):
     if isinstance(obj, torch.Tensor):
-        return obj.tolist()  # 转换为 Python 列表
+        return obj.tolist()
     raise TypeError(f"Object of type {obj.__class__.__name__} is not JSON serializable")
 
 class Trainer(object):
