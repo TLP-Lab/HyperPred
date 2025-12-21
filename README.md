@@ -1,10 +1,9 @@
 ## 1. Overview
 
-PyTorch Implementation for "[HGWaveNet: A Hyperbolic Graph Neural Network for Temporal Link Prediction (WWW2023)](https://dl.acm.org/doi/abs/10.1145/3543507.3583455)“
+PyTorch Implementation for "[HyperPred: Multi-Scale Hyperbolic Framework for Scalable Temporal Link Prediction on Dynamic Graphs“
 
-Authors: Qijie Bai, Changli Nie, Haiwei Zhang, Dongming Zhao, Xiaojie Yuan
+Authors: Fan Wu, QiYuan Wu, Hao Wu, Feng Lyu
 
-![HGWaveNet](./HGWaveNet.png)
 
 ## 2. Examples
 
@@ -14,12 +13,15 @@ Run `python main.py --dataset=dblp` for example.
 
 - `--dataset`, `--data_pt_path`: name and parent path of dataset
 - `--test_length`: number of snapshots for test set
-- `--spatial_dilated_factors`: a list, dilated factor for HGDE module
-- `--casual_conv_depth`, `--casual_conv_kernel_size`: number of temporal casual convolution layers, temporal casual convolution kernel size, used to config the receival field of HDCC module
+- `--diffusion_steps`: a list, diffusion step for HGDE module
+- `--depth_receptive_depth,--casual_conv_kernel_size,--scales`: number of temporal receptive aggregator layers,casual convolution kernel size, depth-wise convolution knernel size, used to config the receival field of TRA module
 
 For all config parameter description, please refer to `./cofig.py`
 
-## 3. Data preprocessing
+## 3. orginal Data
+All datasets can be downloaded from the provided URLs
+
+## 4. Data preprocessing
 
 The demo dataset can be found in `./data/`
 
