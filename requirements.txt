@@ -1,0 +1,9 @@
+geoopt==0.5.0
+matplotlib==3.9.1
+networkx==3.2
+numpy==1.26.4
+scikit-learn==0.24.1
+scipy==1.13.1
+sklearn==1.51
+torch==2.3.1+cu118
+torch-geometric==2.6.1
