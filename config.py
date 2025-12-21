@@ -5,7 +5,7 @@ import os
 
 parser = argparse.ArgumentParser(description='HyperPred')
 
-parser.add_argument('--dataset', type=str, default='HepPh', help='dataset name')
+parser.add_argument('--dataset', type=str, default='dblp', help='dataset name')
 parser.add_argument('--data_pt_path', type=str, default='./data/process', help='parent path of dataset')
 parser.add_argument('--nfeat', type=int, default=16, help='dim of input feature')
 parser.add_argument('--nhid', type=int, default=16, help='dim of hidden embedding')
@@ -13,7 +13,7 @@ parser.add_argument('--nout', type=int, default=16, help='dim of output embeddin
 
 parser.add_argument('--max_epoch', type=int, default=500, help='number of epochs to train.')
 parser.add_argument('--min_epoch', type=int, default=50, help='min epoch')
-parser.add_argument('--test_length', type=int, default=6, help='length for test, default:3')
+parser.add_argument('--test_length', type=int, default=3, help='length for test, default:3')
 parser.add_argument('--device', type=int, default=0, help='gpu id, -1 for cpu')
 parser.add_argument('--seed', type=int, default=1234, help='random seed')
 parser.add_argument('--repeat', type=int, default=3, help='running times')
@@ -34,7 +34,7 @@ parser.add_argument('--manifold', type=str, default='PoincareDisk', help='hyperb
 parser.add_argument('--use_hyperdecoder', type=bool, default=True, help='use hyperbolic decoder or not')
 parser.add_argument('--spatial_dilated_factors', type=list, default=[1,2],
                     help='dilated factor for dilated spatial convolution')
-parser.add_argument('--casual_conv_depth', type=int, default=3, help='number of temporal casual attention layers')
+parser.add_argument('--casual_conv_depth', type=int, default=2, help='number of temporal casual attention layers')
 parser.add_argument('--nb_window', type=int, default=8, help='the length of window')
 parser.add_argument('--casual_conv_kernel_size', type=int, default=2,
                     help='temporal casual convolution kernel size')
