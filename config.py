@@ -32,12 +32,12 @@ parser.add_argument('--use_riemannian_adam', type=bool, default=True,
 parser.add_argument('--model', type=str, default='HyperPred', help='model name')
 parser.add_argument('--manifold', type=str, default='PoincareDisk', help='hyperbolic model Lorentzian')
 parser.add_argument('--use_hyperdecoder', type=bool, default=True, help='use hyperbolic decoder or not')
-parser.add_argument('--spatial_dilated_factors', type=list, default=[1,2],
+parser.add_argument('--diffusion_steps', type=list, default=[1,2],
                     help='dilated factor for dilated spatial convolution')
-parser.add_argument('--casual_conv_depth', type=int, default=2, help='number of temporal casual attention layers')
+parser.add_argument('--receptive_depth', type=int, default=2, help='number of temporal receptive aggregator layers')
 parser.add_argument('--nb_window', type=int, default=8, help='the length of window')
 parser.add_argument('--casual_conv_kernel_size', type=int, default=2,
-                    help='temporal casual convolution kernel size')
+                    help='HDCC kernel size')
 parser.add_argument('--eps', type=float, default=1e-15, help='eps')
 parser.add_argument('--bias', type=bool, default=True, help='use bias or not')
 parser.add_argument('--trainable_feat', type=bool, default=True,
@@ -48,7 +48,7 @@ parser.add_argument('--attention_type', type=str, default='linear_focused',
                     help='full or linear_focused')
 parser.add_argument('--dropout', type=float, default=0.0, help='dropout rate (1 - keep probability).')
 parser.add_argument('--heads', type=int, default=5, help='attention heads.')
-parser.add_argument('--scales', type=list, default=(3,5), help='muti-scale attention.')
+parser.add_argument('--scales', type=list, default=(3,5), help='HDWC kernel size ')
 parser.add_argument('--curvature', type=float, default=1, help='curvature value')
 parser.add_argument('--power_k', type=float, default=2, help='norm value')
 parser.add_argument('--trainable_curvature', type=bool, default=False, help='trainable curvature or not')
