@@ -1,4 +1,4 @@
-geoopt==0.5.0
+geoopt==0.5.1
 matplotlib==3.9.1
 networkx==3.2
 numpy==1.26.4
