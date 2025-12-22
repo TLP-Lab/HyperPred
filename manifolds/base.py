@@ -1,4 +1,4 @@
-from torch.nn import Parameter
+from torch.nn import Paramete
 
 
 class Manifold(object):
