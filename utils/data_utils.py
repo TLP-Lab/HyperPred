@@ -1,4 +1,4 @@
-import o
+import os
 import numpy as np
 import torch
 from scipy.sparse import coo_matrix
