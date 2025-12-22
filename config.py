@@ -46,7 +46,7 @@ parser.add_argument('--add_positional_encoding', type=bool, default=True,
                     help='using positional encoding or not using positional encoding')
 parser.add_argument('--attention_type', type=str, default='linear_focused',
                     help='full or linear_focused')
-parser.add_argument('--dropout', type=float, default=0.0, help='dropout rate (1 - keep probability).')
+parser.add_argument('--dropout', type=float, default=0.0, help='dropout rate (1 - keep probability)')
 parser.add_argument('--heads', type=int, default=5, help='attention heads.')
 parser.add_argument('--scales', type=list, default=(3,5), help='HDWC kernel size ')
 parser.add_argument('--curvature', type=float, default=1, help='curvature value')
