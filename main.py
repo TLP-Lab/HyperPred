@@ -69,7 +69,6 @@ class Trainer(object):
                 diffusion_edge_index = diffusion_edge_index_list[t]
                 self.optimizer.zero_grad()
                 z = self.model(diffusion_edge_index)
-                # print("历史快照长度：",len(self.model.history))
                 epoch_loss = self.loss(z, edge_index) + self.model.htc(z)
                 epoch_loss.backward()
                 if isnan(epoch_loss):
@@ -139,19 +138,12 @@ class Trainer(object):
                                     test_result[5]))
         logger.info('==' * 25)
         logger.info('Total time: {:.3f}'.format(time.time() - t_total))
-        print("最佳AUC：",round(best_auc*100, 2))
-        print("最佳AP：",round(best_ap*100, 2))
-        print("最佳ER：",round(best_er*100, 2))
-        print("最佳new AUC：",round(best_new_auc*100, 2))
-        print("最佳new AP：",round(best_new_ap*100, 2))
-        print("最佳new ER：",round(best_new_er*100, 2))
         return test_result
 
 
     def test(self, embeddings, is_training=False):
         auc_list, ap_list,er_list, new_auc_list, new_ap_list,new_er_list = [], [], [], [],[],[]
         embeddings = embeddings.detach()
-        print("embeddings.shape=",embeddings.shape)
         shots = [self.train_shots[-1]] if is_training else self.test_shots
         for t in shots:
             _, pos_index, neg_index, new_pos_index, new_neg_index = \
