@@ -1,5 +1,3 @@
-"""Poincare ball manifold."""
-
 import torch
 from manifolds.base import Manifold
 from utils.math_utils import artanh, tanh
