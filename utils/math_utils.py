@@ -1,4 +1,4 @@
-import torc
+import torch
 
 
 def cosh(x, clamp=15):
