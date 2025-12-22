@@ -40,21 +40,10 @@ class Trainer(object):
             args.device
         )
         t_total = time.time()
+        train_result = []
         test_result = []
         min_loss = 1.0e8
         patience = 0
-        auc_list=[]
-        ap_list=[]
-        er_list=[]
-        new_auc_list=[]
-        new_ap_list=[]
-        new_er_list=[]
-        best_auc=0
-        best_ap=0
-        best_er=1
-        best_new_auc=0
-        best_new_ap=0
-        best_new_er=1
         for epoch in range(1, args.max_epoch + 1):
             t_epoch = time.time()
             epoch_losses = []
@@ -84,35 +73,17 @@ class Trainer(object):
             average_epoch_loss = np.mean(epoch_losses)
             train_result = self.test(z, is_training=True)
             test_result = self.test(z)
-            auc_list.append(test_result[0])
-            ap_list.append(test_result[1])
-            er_list.append(test_result[2])
-            new_auc_list.append(test_result[3])
-            new_ap_list.append(test_result[4])
-            new_er_list.append(test_result[5])
-            if best_auc<test_result[0]:
-                best_auc=test_result[0]
-            if best_ap<test_result[1]:
-                best_ap=test_result[1]
-            if best_er>test_result[2]:
-                best_er=test_result[2]
-            if best_new_auc<test_result[3]:
-                best_new_auc=test_result[3]
-            if best_new_ap<test_result[4]:
-                best_new_ap=test_result[4]
-            if best_new_er>test_result[5]:
-                best_new_er=test_result[5]
 
             if average_epoch_loss < min_loss:
                 min_loss = average_epoch_loss
                 patience = 0
-
             else:
                 patience += 1
                 if epoch > args.min_epoch and patience > args.patience:
                     logger.info('==' * 25)
                     logger.info('early stopping!')
                     break
+                
             gpu_mem_alloc = torch.cuda.max_memory_allocated() / 1024 / 1024 if torch.cuda.is_available() else 0
             if epoch == 1 or epoch % args.log_interval == 0:
                 logger.info('==' * 25)
