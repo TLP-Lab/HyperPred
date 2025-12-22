@@ -19,7 +19,7 @@ Run `python main.py --dataset=dblp` for example.
 For all config parameter description, please refer to `./cofig.py`
 
 ## 3. Orginal Data
-All datasets can be downloaded from the provided URLs
+All datasets can be downloaded from the provided urls
 
 ## 4. Data preprocessing
 
