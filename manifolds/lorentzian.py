@@ -1,4 +1,4 @@
-import torch
+import torc
 
 from manifolds.base import Manifold
 from utils.math_utils import arcosh
