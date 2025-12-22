@@ -1,3 +1,3 @@
 from .layers import Linear, FermiDiracDecoder
 from .lorentz_layers import LorentzLinear, LorentzGraphNeuralNetwork, LorentzGraphDecoder
-from .poincare_layers import HGCNConv, HypLinear,EfficientMLHA
+from .poincare_layers import HypLinear,HGCNConv,EfficientMLHA
