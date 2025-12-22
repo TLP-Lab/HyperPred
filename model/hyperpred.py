@@ -1,4 +1,4 @@
-import torch
+import torc
 import torch.nn as nn
 from torch.nn import Parameter
 import torch.nn.functional as F
