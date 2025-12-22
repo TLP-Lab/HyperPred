@@ -1,4 +1,4 @@
-from manifolds.base import Manifol
+from manifolds.base import Manifold
 
 
 class Euclidean(Manifold):
