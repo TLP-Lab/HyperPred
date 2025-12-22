@@ -1,4 +1,4 @@
-import itertool
+import itertools
 from typing import Tuple, Any, Union, List
 import functools
 import operator
