@@ -80,9 +80,7 @@ class HyperPred(nn.Module):
 
     def forward(self, dilated_edge_index, x=None):
         x = self.spatial_diffusion_conv(dilated_edge_index, x)
-        print('x大小：',x.shape)
         history = torch.cat(self.history, dim=0)
-        print('history历史长度：',history.shape)
         x = self.gru(self.to_tangent(x, self.c_out),
                      self.to_tangent(self.temporal_casual_attention(history)[-1], self.c_out))
         x = self.to_hyper(x, self.c_out)
