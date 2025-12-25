@@ -4,11 +4,6 @@ from utils.math_utils import artanh, tanh
 
 
 class PoincareDisk(Manifold):
-    """
-    PoicareBall Manifold class.
-    We use the following convention: x0^2 + x1^2 + ... + xd^2 < 1 / c
-    Note that 1/sqrt(c) is the Poincare ball radius.
-    """
     def __init__(self, ):
         super(PoincareDisk, self).__init__()
         self.name = 'PoincareDisk'
