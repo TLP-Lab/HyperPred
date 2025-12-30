@@ -33,7 +33,7 @@ parser.add_argument('--model', type=str, default='HyperPred', help='model name')
 parser.add_argument('--manifold', type=str, default='PoincareDisk', help='hyperbolic model Lorentzian')
 parser.add_argument('--use_hyperdecoder', type=bool, default=True, help='use hyperbolic decoder or not')
 parser.add_argument('--diffusion_steps', type=list, default=[1,2],
-                    help='dilated factor for dilated spatial convolution')
+                    help='maximum order for graph diffusion encoder')
 parser.add_argument('--receptive_depth', type=int, default=2, help='number of temporal receptive aggregator layers')
 parser.add_argument('--nb_window', type=int, default=8, help='the length of window')
 parser.add_argument('--casual_conv_kernel_size', type=int, default=2,
