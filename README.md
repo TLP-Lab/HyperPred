@@ -1,8 +1,8 @@
 ## 1. Overview
 
-PyTorch Implementation for "[HyperPred: Multi-Scale Hyperbolic Framework for Scalable Temporal Link Prediction on Dynamic Graphs“
+PyTorch Implementation for "HyperPred: Multi-Scale Hyperbolic Framework for Scalable Temporal Link Prediction on Dynamic Graphs"
 
-Authors: Fan Wu, QiYuan Wu, Hao Wu, Feng Lyu
+Authors: Fan Wu, QiYuan Wu, Hao Wu, Zhaoyun Ding, Chao Chen,Shuang Gu,Feng Lyu
 
 
 ## 2. Examples
