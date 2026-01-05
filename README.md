@@ -13,13 +13,13 @@ Run `python main.py --dataset=dblp` for example.
 
 - `--dataset`, `--data_pt_path`: name and parent path of dataset
 - `--test_length`: number of snapshots for test set
-- `--diffusion_steps`: a list, diffusion step for HGDE module
+- `--diffusion_steps`: a list, maximum order for HGDE module
 - `--depth_receptive_depth,--casual_conv_kernel_size,--scales`: number of temporal receptive aggregator layers,casual convolution kernel size, depth-wise convolution knernel size, used to config the receival field of TRA module
 
 For all config parameter description, please refer to `./cofig.py`
 
 ## 3. Orginal Data
-All datasets can be downloaded from the provided urls
+All datasets can be downloaded from the provided urls in `./data/orgin/`
 
 ## 4. Data preprocessing
 
