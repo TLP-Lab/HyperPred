@@ -60,14 +60,6 @@ class HyperPred(nn.Module):
         self.history = [self.init_hyper(self.history_initial).unsqueeze(0)] * self.window_size
         return self.history
 
-    def aggregate_history(self, history):
-        att = torch.matmul(torch.tanh(torch.matmul(history, self.Q)), self.r)
-        att = torch.reshape(att, (self.window_size, -1))
-        att = F.softmax(att, dim=0).unsqueeze(2)
-        history_reshape = torch.reshape(history, [self.window_size, -1, self.nout])
-        history_agg = torch.mean(att * history_reshape, dim=0)
-        return history_agg
-
 
     def htc(self, x):
         x = self.manifold.proj(x, self.c_out)
