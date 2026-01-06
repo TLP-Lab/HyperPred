@@ -31,14 +31,6 @@ class HyperPred(nn.Module):
         self.gru = nn.GRUCell(args.nout, args.nout)
         self.linear = HypLinear(self.manifold, args.nout, args.nout, self.c_out, self.device,
                                 dropout=args.dropout, use_bias=args.bias)
-        self.Q = Parameter(torch.ones((args.nout, args.nhid)).to(args.device), requires_grad=True)
-        self.r = Parameter(torch.ones((args.nhid, 1)).to(args.device), requires_grad=True)
-        self.reset_parameters()
-
-    def reset_parameters(self):
-        glorot(self.history_initial)
-        glorot(self.Q)
-        glorot(self.r)
 
     def to_hyper(self, x, c=1.0):
         if isinstance(c, float):
