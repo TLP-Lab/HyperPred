@@ -23,7 +23,7 @@ All datasets can be downloaded from the provided urls in `./data/orgin/`
 
 ## 4. Data preprocessing
 
-The demo dataset can be found in `./data/`
+The demo dataset can be found in `./data/process`
 
 The input data is a serialized `dict` object by `torch.save()`. It has the following keys:
 
