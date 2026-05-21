@@ -16,7 +16,7 @@ Run `python main.py --dataset=dblp` for example.
 - `--diffusion_steps`: a list, maximum order for HGDE module
 - `--depth_receptive_depth,--casual_conv_kernel_size,--scales`: number of temporal receptive aggregator layers,casual convolution kernel size, depth-wise convolution knernel size, used to config the receival field of TRA module
 
-For all config parameter description, please refer to `./cofig.py`
+For all config parameter description, please refer to `./config.py`
 
 ## 3. Orginal Data
 All datasets can be downloaded from the provided urls in `./data/orgin/`
